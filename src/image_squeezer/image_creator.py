@@ -23,9 +23,6 @@ class ImageCreator(ABC):
 
 
 class CreatePillowImage(ImageCreator):
-    """
-    Converts a picture to a Pillow image object
-    """
 
     def __init__(self, file: Union[Path, str]):
         super().__init__(file)
@@ -34,7 +31,6 @@ class CreatePillowImage(ImageCreator):
         try:
             if self._file.suffix.lower() == ".heic":
                 register_heif_opener()  # https://stackoverflow.com/questions/54395735/how-to-work-with-heic-image-file-types-in-python
-                return Image.open(self._file)
             return Image.open(self._file)
         except FileNotFoundError as exc:
             raise FileNotFoundError(f"The file {self._file} was not found") from exc
@@ -42,5 +38,3 @@ class CreatePillowImage(ImageCreator):
             raise PermissionError(f"Permission denied for file {self._file}") from exc
         except OSError as exc:
             raise OSError(f"An error occurred while opening the file {self._file}: {exc}") from exc
-        except Exception as exc:
-            raise Exception(f"An unexpected error occurred: {exc}") from exc
