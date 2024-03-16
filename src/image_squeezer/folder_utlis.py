@@ -33,14 +33,9 @@ def validate_path(path: Path) -> bool:
 def load_image(picture: Path) -> Union[Image, None]:
     try:
         if not picture.exists():
-            raise ValueError('File not found.')
-        if not os.access(picture, os.R_OK):
-            raise PermissionError(f"Permission denied for file {picture}")
-        else:
-            image_creator = CreatePillowImage(file=picture)
-            image_obj = image_creator.convert_image()
-            return image_obj
-    except PermissionError as exc:
-        raise PermissionError(f"Permission error: {exc}") from exc
+            raise FileNotFoundError(f"File {picture} not found.")
+        image_creator = CreatePillowImage(file=picture)
+        image_obj = image_creator.convert_image()
+        return image_obj
     except OSError as exc:
         raise OSError(f"Error opening image: {exc}") from exc
