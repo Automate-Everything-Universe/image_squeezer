@@ -5,7 +5,7 @@ from pathlib import Path
 from PIL import Image
 from typing import Union, Tuple, List
 
-from image_creator import CreatePillowImage
+from .image_creator import CreatePillowImage
 
 
 def find_files(path: Path, extension: Union[str, Tuple, None]) -> List[Path]:
