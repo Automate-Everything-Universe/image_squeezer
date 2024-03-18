@@ -6,9 +6,9 @@ import argparse
 from pathlib import Path
 
 
-from src.image_squeezer.folder_utlis import find_files, load_image
-from src.image_squeezer.saver import SavePic
-from src.image_squeezer.sizer import AspectRatioSizer
+from image_squeezer.folder_utlis import find_files, load_image
+from image_squeezer.saver import SavePic
+from image_squeezer.sizer import AspectRatioSizer
 
 IMAGE_EXTENSIONS = (".png", ".jpg", ".jpeg", ".heic")
 
