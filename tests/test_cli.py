@@ -58,8 +58,8 @@ def test_cli(expected_backup_folder, expected_heic, expected_png, expected_jpeg)
     assert expected_backup_folder.exists(), "Backup folder does not exist"
 
     assert expected_heic.exists(), "Heic resized image does not exist"
-    assert expected_png.exists(), "Heic resized image does not exist"
-    assert expected_jpeg.exists(), "Heic resized image does not exist"
+    assert expected_png.exists(), "Png resized image does not exist"
+    assert expected_jpeg.exists(), "Jpeg resized image does not exist"
 
     # Clean up
     shutil.rmtree(expected_backup_folder)
