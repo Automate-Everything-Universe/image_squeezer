@@ -29,7 +29,7 @@ def validate_path(path: Path) -> bool:
     return True
 
 
-def load_image(picture: Path) -> Union[Image, None]:
+def load_image(picture: Path) -> Image.Image:
     try:
         if not picture.exists():
             raise FileNotFoundError(f"File {picture} not found.")
