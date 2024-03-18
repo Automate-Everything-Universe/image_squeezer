@@ -3,7 +3,6 @@ Module which handles the sizing
 """
 from abc import ABC
 from abc import abstractmethod
-from typing import Union
 
 from PIL import Image
 

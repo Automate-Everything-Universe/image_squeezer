@@ -5,7 +5,6 @@ Main entry for the CLI
 import argparse
 from pathlib import Path
 
-from PIL.Image import Image
 
 from src.image_squeezer.folder_utlis import find_files, load_image
 from src.image_squeezer.saver import SavePic

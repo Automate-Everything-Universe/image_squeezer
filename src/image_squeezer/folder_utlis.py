@@ -1,7 +1,6 @@
 """
 Module to handle file operations
 """
-import os
 from pathlib import Path
 from PIL import Image
 from typing import Union, Tuple, List
