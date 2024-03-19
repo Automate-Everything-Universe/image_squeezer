@@ -1,6 +1,7 @@
 """
 Module to handle file operations
 """
+
 import os
 from pathlib import Path
 from PIL import Image
@@ -16,7 +17,9 @@ def find_files(path: Path, extension: Union[str, Tuple, None]) -> List[Path]:
     elif extension:
         pics = [pic for pic in path.iterdir() if pic.suffix.lower() in extension]
         if not pics:
-            raise FileNotFoundError(f"No picture was found with {extension} in folder {path}")
+            raise FileNotFoundError(
+                f"No picture was found with {extension} in folder {path}"
+            )
         return pics
     pics = [pic for pic in path.iterdir()]
     if not pics:
@@ -50,6 +53,6 @@ def get_file_size(file: Path, unit: str = "MB") -> float:
     stats = os.stat(file)
     file_size_bytes = stats.st_size
     if unit.lower() == "mb":
-        return file_size_bytes / 1024 ** 2
+        return file_size_bytes / 1024**2
 
     return file_size_bytes

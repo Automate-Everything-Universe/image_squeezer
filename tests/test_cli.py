@@ -51,7 +51,9 @@ def expected_jpeg() -> Path:
 def test_cli(expected_backup_folder, expected_heic, expected_png, expected_jpeg):
     command = ["python", str(MAIN), "--folder", str(TEST_FOLDER)]
 
-    result = subprocess.run(command, capture_output=True, check=True, timeout=180, cwd=TEST_FOLDER)
+    result = subprocess.run(
+        command, capture_output=True, check=True, timeout=180, cwd=TEST_FOLDER
+    )
 
     assert result.returncode == 0, f"Script failed with errors: {result.stderr}"
 

@@ -1,6 +1,7 @@
 """
 Module which handles the sizing
 """
+
 from abc import ABC
 from abc import abstractmethod
 
@@ -37,11 +38,13 @@ class AspectRatioSizer(Sizer):
 
     def resize(self) -> Image:
         new_height = self._calculate_height(img=self.image)
-        resized_img = self.image.resize(size=(self._width, new_height), resample=Image.Resampling.LANCZOS)
+        resized_img = self.image.resize(
+            size=(self._width, new_height), resample=Image.Resampling.LANCZOS
+        )
         resized_img.filename = self.filename
         return resized_img
 
     def _calculate_height(self, img: Image):
-        w_percent = (self._width / float(img.size[0]))
+        w_percent = self._width / float(img.size[0])
         new_height = int(float(img.size[1]) * float(w_percent))
         return new_height

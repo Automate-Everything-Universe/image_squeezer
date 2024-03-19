@@ -1,6 +1,7 @@
 """
 Module which handles saving the picture
 """
+
 from pathlib import Path
 from typing import Union
 

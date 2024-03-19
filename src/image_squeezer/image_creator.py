@@ -23,7 +23,6 @@ class ImageCreator(ABC):
 
 
 class CreatePillowImage(ImageCreator):
-
     def __init__(self, file: Union[Path, str]):
         super().__init__(file)
 
@@ -37,4 +36,6 @@ class CreatePillowImage(ImageCreator):
         except PermissionError as exc:
             raise PermissionError(f"Permission denied for file {self._file}") from exc
         except OSError as exc:
-            raise OSError(f"An error occurred while opening the file {self._file}: {exc}") from exc
+            raise OSError(
+                f"An error occurred while opening the file {self._file}: {exc}"
+            ) from exc
