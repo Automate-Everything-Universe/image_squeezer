@@ -5,12 +5,11 @@ Main entry for the CLI
 import argparse
 from pathlib import Path
 
-
 from image_squeezer.folder_utlis import find_files, load_image, get_file_size
 from image_squeezer.saver import SavePic
 from image_squeezer.sizer import AspectRatioSizer
 
-IMAGE_EXTENSIONS = (".png", ".jpg", ".jpeg", ".heic")
+from image_squeezer.extensions import ALLOWED_EXTENSIONS
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -95,13 +94,13 @@ def main() -> None:
 
 
 def start_process(args, folder):
-    pics = find_files(path=folder, extension=IMAGE_EXTENSIONS)
+    pics = find_files(path=folder, extension=ALLOWED_EXTENSIONS)
     original_pics_size = sum([get_file_size(pic) for pic in pics])
     print(f"Files total size: {original_pics_size:.2f}")
     for pic in pics:
         _process_image(pic=pic, user_args=args)
 
-    reduced_pics = find_files(path=folder / "backup", extension=IMAGE_EXTENSIONS)
+    reduced_pics = find_files(path=folder / "backup", extension=ALLOWED_EXTENSIONS)
     reduced_pics_size = sum([get_file_size(pic) for pic in reduced_pics])
     print(f"Resized files total size: {original_pics_size:.2f}")
     print(
