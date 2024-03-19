@@ -1,6 +1,7 @@
 """
 Module to handle file operations
 """
+import os
 from pathlib import Path
 from PIL import Image
 from typing import Union, Tuple, List
@@ -38,3 +39,17 @@ def load_image(picture: Path) -> Image.Image:
         return image_obj
     except OSError as exc:
         raise OSError(f"Error opening image: {exc}") from exc
+
+
+def get_file_size(file: Path, unit: str = "MB") -> float:
+    if not file:
+        raise AttributeError("No file provided")
+    if unit not in ("MB", "byte"):
+        raise ValueError("Unit must be 'byte' or 'MB'")
+
+    stats = os.stat(file)
+    file_size_bytes = stats.st_size
+    if unit.lower() == "mb":
+        return file_size_bytes / 1024 ** 2
+
+    return file_size_bytes

@@ -6,7 +6,7 @@ import argparse
 from pathlib import Path
 
 
-from image_squeezer.folder_utlis import find_files, load_image
+from image_squeezer.folder_utlis import find_files, load_image, get_file_size
 from image_squeezer.saver import SavePic
 from image_squeezer.sizer import AspectRatioSizer
 
@@ -40,6 +40,8 @@ def parse_arguments() -> argparse.Namespace:
 
 
 def _process_image(pic: Path, user_args: argparse.Namespace) -> None:
+    original_file_size = get_file_size(pic)
+
     image_object = load_image(picture=pic)
     suffix = user_args.suffix if user_args.suffix else None
 
@@ -55,6 +57,8 @@ def _process_image(pic: Path, user_args: argparse.Namespace) -> None:
     suffix = suffix if suffix else None
     image_saver = SavePic(img=image_object)
     image_saver.save_image(path=save_folder, suffix=suffix)
+    image_path = image_saver.image_path
+    reduced_file_size = get_file_size(image_path)
 
 
 def main() -> None:
@@ -90,8 +94,16 @@ def main() -> None:
 
 def start_process(args, folder):
     pics = find_files(path=folder, extension=IMAGE_EXTENSIONS)
+    original_pics_size = sum([get_file_size(pic) for pic in pics])
+    print(f"Files total size: {original_pics_size:.2f}")
     for pic in pics:
         _process_image(pic=pic, user_args=args)
+
+    reduced_pics = find_files(path=folder / "backup", extension=IMAGE_EXTENSIONS)
+    reduced_pics_size = sum([get_file_size(pic) for pic in reduced_pics])
+    print(f"Resized files total size: {original_pics_size:.2f}")
+    print(f"Diskspace saved by resizing: {original_pics_size - reduced_pics_size:.02f} MB")
+
 
 
 if __name__ == "__main__":
