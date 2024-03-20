@@ -96,13 +96,13 @@ def main() -> None:
 def start_process(args, folder):
     pics = find_files(path=folder, extension=ALLOWED_EXTENSIONS)
     original_pics_size = sum([get_file_size(pic) for pic in pics])
-    print(f"Files total size: {original_pics_size:.2f}")
+    print(f"Files total size: {original_pics_size:.2f} MB")
     for pic in pics:
         _process_image(pic=pic, user_args=args)
 
     reduced_pics = find_files(path=folder / "backup", extension=ALLOWED_EXTENSIONS)
     reduced_pics_size = sum([get_file_size(pic) for pic in reduced_pics])
-    print(f"Resized files total size: {original_pics_size:.2f}")
+    print(f"Resized files total size: {reduced_pics_size:.2f} MB")
     print(
         f"Diskspace saved by resizing: {original_pics_size - reduced_pics_size:.02f} MB"
     )
